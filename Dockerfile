@@ -1,25 +1,16 @@
-# start from base
-FROM ubuntu:18.04
+from alpine:latest
 
-LABEL maintainer="Viraj Vaishnav || NIT Meghalaya CSE'23 || CEH || eJPT || Bug Hunter || CTF Player"
-
-RUN apt-get update -y && \
-    apt-get install -y python3-pip python3-dev
-
-# We copy just the requirements.txt first to leverage Docker cache
-
-COPY -r ./env /app/
+RUN apk add --no-cache python3-dev py3-pip \
+    && pip3 install --upgrade pip
 
 WORKDIR /app
 
-#RUN pip3 install -r requirements.txt
-RUN pip3 install virtualenv
 COPY . /app
-RUN source env/bin/activate
-RUN ifconfig
 
-#COPY . /app
+RUN pip3 --no-cache-dir install -r requirements.txt
 
-CMD [ "flask", "run" ]
-
+EXPOSE 5000
+RUN ip addr
+ENTRYPOINT ["flask"]
+CMD ["run"]
 

@@ -1,4 +1,6 @@
 from flask import Flask,render_template,request,render_template_string
+import logging as logger
+logger.basicConfig(level="DEBUG")
 app = Flask(__name__)
 app.first_flag = "N&S{Th1s_1s_y0ur_F1rst_Fl4g}"
 
@@ -17,4 +19,6 @@ def whoareyou():
     return render_template_string(template)
 
 if "__name__" == "__main__":
-     app.run()
+     logger.debug("Starting Flask Server")
+     app.run(host='0.0.0.0',port=80)
+     #app.run()

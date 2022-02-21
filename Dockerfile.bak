@@ -1,0 +1,34 @@
+# start from base
+FROM ubuntu:18.04
+
+LABEL maintainer="Viraj Vaishnav || NIT Meghalaya CSE'23 || CEH || eJPT || Bug Hunter || CTF Player"
+
+RUN apt-get update -y && \
+    apt-get install -y python3-pip python3-dev net-tools
+
+# We copy just the requirements.txt first to leverage Docker cache
+
+WORKDIR /app
+COPY . /app
+RUN pip3 install --upgrade pip
+RUN pip3 install -r requirements.txt
+RUN pip3 install virtualenv
+#RUN pip3 install Flask
+#COPY . /app
+#RUN . env/bin/activate
+#CMD [ ".", "env/bin/activate" ]
+RUN ifconfig
+EXPOSE 5000
+
+## running app commands
+ENTRYPOINT ["flask"]
+CMD ["run"]
+## running app commands
+
+
+#COPY . /app
+#CMD [ "pip3","install","Flask" ]
+#CMD [ "export","FLASK_APP=app.py" ]
+#CMD [ "flask", "run" ]
+
+
