@@ -8,9 +8,9 @@ WORKDIR /app
 COPY . /app
 
 RUN pip3 --no-cache-dir install -r requirements.txt
-
+#RUN python3 -m http.server --bind 0.0.0.0
 EXPOSE 5000
 RUN ip addr
 ENTRYPOINT ["flask"]
-CMD ["run"]
+CMD ["run","--host","0.0.0.0"]
 
