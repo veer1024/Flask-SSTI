@@ -1,2 +1,2 @@
 # Flask-SSTI
-This is flask
+This is flask web app created for demonstration of SSTI vulnerability
